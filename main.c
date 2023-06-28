@@ -19,8 +19,11 @@ int main(void)
 
 	while (1)
 	{
-		_putchar(prompt[0]);
-		_putchar(prompt[1]);
+		if (isatty(STDIN_FILENO))
+		{
+			_putchar(prompt[0]);
+			_putchar(prompt[1]);
+		}
 		result = getline(&buffer, &len, stdin);
 		if (result == -1)
 		{
@@ -43,9 +46,9 @@ int main(void)
 				else
 					wait(NULL);
 			}
+			free(args);
 		}
 	}
 	free(buffer);
-	free(args);
 	return (0);
 }
