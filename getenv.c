@@ -19,7 +19,7 @@ char *_getenv(char **envp)
 
 	while (*envp != NULL)
 	{
-		if (strncmp(*envp, name, len) == 0 && (*envp)[len] == '=')
+		if (_strncmp(*envp, name, len) == 0 && (*envp)[len] == '=')
 		{
 			path = &((*envp)[len + 1]);
 		}
@@ -60,12 +60,16 @@ char **sep_path(char **envp)
 	char **tokens;
 	char *buf_cpy = (char *)malloc(1024);
 
+	if (!buf_cpy)
+		return (NULL);
 	envp = environ;
 	path = _getenv(envp);
 	_strcpy(buf_cpy, path);
 	arr_len = len_path(buf_cpy);
 	token = strtok(path, ":");
-	tokens = malloc(sizeof(char *) * 120);
+	tokens = malloc(sizeof(char *) * (arr_len + 1));
+	if (!tokens)
+		return (NULL);
 	while (token != NULL)
 	{
 		tokens[j++] = token;

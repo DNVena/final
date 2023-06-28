@@ -38,10 +38,14 @@ char **tokenize(char *buffer)
 	char **args;
 	char *buf_cpy = (char *)malloc(1024);
 
+	if (!buf_cpy)
+		return (NULL);
 	_strcpy(buf_cpy, buffer);
 	num = len_buf(buf_cpy);
 	args = malloc(sizeof(char *) * (num + 1));
 
+	if (!args)
+		return (NULL);
 	token = strtok(buffer, " \n");
 	len = _strlen(token);
 	while (token != NULL)
