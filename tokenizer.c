@@ -38,7 +38,7 @@ char **tokenize(char *buffer)
 	char **args;
 	char *buf_cpy = (char *)malloc(1024);
 
-	strcpy(buf_cpy, buffer);
+	_strcpy(buf_cpy, buffer);
 	num = len_buf(buf_cpy);
 	args = malloc(sizeof(char *) * (num + 1));
 

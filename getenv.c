@@ -15,7 +15,7 @@ char *_getenv(char **envp)
 	char *path;
 	int len;
 
-	len = strlen(name);
+	len = _strlen(name);
 
 	while (*envp != NULL)
 	{
@@ -62,7 +62,7 @@ char **sep_path(char **envp)
 
 	envp = environ;
 	path = _getenv(envp);
-	strcpy(buf_cpy, path);
+	_strcpy(buf_cpy, path);
 	arr_len = len_path(buf_cpy);
 	token = strtok(path, ":");
 	tokens = malloc(sizeof(char *) * 120);
@@ -96,7 +96,7 @@ char *find_path(char **path, char *filename)
 
 			while ((entry = readdir(dir)) != NULL)
 			{
-				if (strcmp(entry->d_name, filename) == 0)
+				if (_strcmp(entry->d_name, filename) == 0)
 				{
 					closedir(dir);
 					return (path[i]);
@@ -127,9 +127,9 @@ char *command(char **path, char *filename)
 	{
 		return (NULL);
 	}
-	len = strlen(filename);
-	com = strncat(token, &s, 1);
-	command = strncat(com, filename, len);
+	len = _strlen(filename);
+	com = _strncat(token, &s, 1);
+	command = _strncat(com, filename, len);
 
 	return (command);
 }

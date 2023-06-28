@@ -17,4 +17,5 @@ char *find_path(char **path, char *filename);
 char **prep(char *buffer, char **path);
 void _exec(char **args, char **envp);
 char *command(char **path, char *filename);
+int _strcmp(char *s1, char *s2);
 #endif

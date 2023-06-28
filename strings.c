@@ -113,3 +113,37 @@ char *_strncat(char *dest, char *src, int n)
 	dest[i] = '\0';
 	return (dest);
 }
+
+/**
+ * _strcmp - compares 2 strings
+ * @s1: takes character pointer
+ * @s2: takes character pointer
+ * Return: Always 0
+ */
+int _strcmp(char *s1, char *s2)
+{
+	int com;
+
+	while (*s1 && *s2)
+	{
+		if (*s1 != *s2)
+		{
+			return (*s1 - *s2);
+		}
+		s1++;
+		s2++;
+	}
+	if (*s1 == *s2)
+	{
+		com = 0;
+	}
+	else if (*s1 < *s2)
+	{
+		com = -1;
+	}
+	else
+	{
+		com = 1;
+	}
+	return (com);
+}
