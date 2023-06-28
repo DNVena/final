@@ -33,24 +33,24 @@ int len_buf(char *buffer)
  */
 char **tokenize(char *buffer)
 {
-	int i, num, len;
+	int i = 0, num, len;
 	char *token;
 	char **args;
 	char *buf_cpy;
 
 	buf_cpy = _strdup(buffer);
-	num = len_buf(buffer);
+	num = len_buf(buf_cpy);
 	args = malloc(sizeof(char *) * (num + 1));
 
-	token = strtok(buf_cpy, " \n");
+	token = strtok(buffer, " \n");
 	len = _strlen(token);
-	for (i = 0; token != NULL; i++)
+	while (token != NULL)
 	{
-		args[i] = malloc(sizeof(char) * (len + 1));
-		args[i] = _strcpy(args[i], token);
+		args[i++] = token;
 		token = strtok(NULL, " \n");
 	}
 	args[i] = NULL;
+	free(buf_cpy);
 	return (args);
 }
 

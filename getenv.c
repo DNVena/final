@@ -53,7 +53,7 @@ int len_path(char *buffer)
  */
 char **sep_path(char **envp)
 {
-	char *buf_cpy, *use_buf;
+	char *buf_cpy;
 	char *token, *path;
 	int j = 0;
 	int arr_len;
@@ -62,9 +62,8 @@ char **sep_path(char **envp)
 
 	path = _getenv(envp);
 	buf_cpy = strdup(path);
-	use_buf = strdup(path);
-	arr_len = len_path(buf_cpy);
-	token = strtok(use_buf, ":");
+	arr_len = len_path(path);
+	token = strtok(buf_cpy, ":");
 	tokens = malloc(sizeof(char *) * (arr_len + 1));
 	while (token != NULL)
 	{
@@ -72,6 +71,7 @@ char **sep_path(char **envp)
 		token = strtok(NULL, ":");
 	}
 	tokens[j] = NULL;
+	free(buf_cpy);
 	return (tokens);
 }
 
