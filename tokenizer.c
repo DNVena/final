@@ -50,6 +50,7 @@ char **tokenize(char *buffer)
 		token = strtok(NULL, " \n");
 	}
 	args[i] = NULL;
+	free(buf_cpy);
 	return (args);
 }
 
