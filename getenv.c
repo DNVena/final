@@ -8,9 +8,8 @@
  * _getenv - gets environment
  * Return: pointer
  */
-char *_getenv()
+char *_getenv(char **envp)
 {
-	char **envp = environ;
 	char *name = "PATH";
 	char *path;
 	int len;
@@ -54,16 +53,18 @@ int len_path(char *buffer)
  */
 char **sep_path(char **envp)
 {
-	char *buf_cpy;
+	char *buf_cpy, *use_buf;
 	char *token, *path;
 	int j = 0;
 	int arr_len;
 	char **tokens;
+	envp = environ;
 
-	path = _getenv();
+	path = _getenv(envp);
 	buf_cpy = strdup(path);
+	use_buf = strdup(path);
 	arr_len = len_path(buf_cpy);
-	token = strtok(path, ":");
+	token = strtok(use_buf, ":");
 	tokens = malloc(sizeof(char *) * (arr_len + 1));
 	while (token != NULL)
 	{

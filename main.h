@@ -11,7 +11,7 @@ int len_buf(char *buffer);
 char **tokenize(char *buffer);
 char **sep_path(char **envp);
 int len_path(char *buffer);
-char *_getenv();
+char *_getenv(char **envp);
 char **checker(char **path, char **args);
 char *find_path(char **path, char *filename);
 char **prep(char *buffer);
