@@ -74,3 +74,64 @@ char **sep_path(char **envp)
 	free(buf_cpy);
 	return (tokens);
 }
+
+/**
+ * find_path - finds absolute path to command
+ * @path: takes pointer to pointer
+ * @filename: takes command name
+ * Return: pointer
+ */
+char *find_path(char **path, char *filename)
+{
+	int i;
+
+	for (i = 0; path != NULL; i++)
+	{
+		DIR *dir = opendir(path[i]);
+
+		if (dir != NULL)
+		{
+			struct dirent *entry;
+
+			while ((entry = readdir(dir)) != NULL)
+			{
+				if (strcmp(entry->d_name, filename) == 0)
+				{
+					closedir(dir);
+					return (path[i]);
+				}
+			}
+			closedir(dir);
+		}
+	}
+	return (NULL);
+}
+
+/**
+ * command - finds absolute command
+ * @path: takes pointer to pointer
+ * @filename: takes pointer
+ * Return: pointer
+ */
+char *command(char **path, char *filename)
+{
+	char *token;
+	char *com;
+	char *command;
+	char s = '/';
+	int len, i;
+
+	token = find_path(path, filename);
+	if (token == NULL)
+	{
+		return (NULL);
+	}
+	len = strlen(filename);
+	i = strlen(token);
+	com = malloc(i + 1);
+	command = malloc(len + i + 1);
+	com = strncat(token, &s, 1);
+	command = strncat(com, filename, len);
+
+	return (command);
+}

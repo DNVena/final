@@ -54,3 +54,42 @@ char **tokenize(char *buffer)
 	free(buf_cpy);
 	return (args);
 }
+
+/**
+ * checker - checks if command if valid
+ * @path: takes pointer to pointer
+ * @args: takes pointer to pointer
+ * Return: pointer to pointer
+ */
+char **checker(char **path, char **args)
+{
+	char *new;
+	int i;
+
+	if ((*args)[0] != '/')
+	{
+		new = command(path, args[0]);
+		if (new == NULL)
+		{
+			return (NULL);
+		}
+		else
+		{
+			 i = _strlen(new);
+			 args[0] = malloc(sizeof(char) * (i + 1));
+			 args[0] = new;
+		}
+	}
+	else if ((*args)[0] == '/')
+	{
+		if (access(args[0], F_OK) == -1)
+		{
+			return (NULL);
+		}
+		else
+		{
+			return (args);
+		}
+	}
+	return (args);
+}
