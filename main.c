@@ -12,7 +12,7 @@
  */
 int main(void)
 {
-	char **args, **envp, **path,*buffer = NULL, *prompt = "$ ";
+	char **args, **envp, **path, *buffer = NULL, *prompt = "$ ";
 	ssize_t result;
 	size_t len = 0;
 	pid_t pid;
@@ -21,10 +21,8 @@ int main(void)
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
-		{
 			_putchar(prompt[0]);
 			_putchar(prompt[1]);
-		}
 		result = getline(&buffer, &len, stdin);
 		if (result == -1)
 		{

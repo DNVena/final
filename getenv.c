@@ -6,6 +6,7 @@
 
 /**
  * _getenv - gets environment
+ * @envp: takes pointer to pointer
  * Return: pointer
  */
 char *_getenv(char **envp)
@@ -58,13 +59,13 @@ char **sep_path(char **envp)
 	int arr_len;
 	char **tokens;
 	char *buf_cpy = (char *)malloc(1024);
-	envp = environ;
 
+	envp = environ;
 	path = _getenv(envp);
 	strcpy(buf_cpy, path);
 	arr_len = len_path(buf_cpy);
 	token = strtok(path, ":");
-	tokens = malloc(sizeof(char *) * (arr_len + 1));
+	tokens = malloc(sizeof(char *) * 120);
 	while (token != NULL)
 	{
 		tokens[j++] = token;
