@@ -12,11 +12,12 @@
  */
 int main(void)
 {
-	char **args, *buffer = NULL, *prompt = "$ ";
+	char **args, **envp, **path,*buffer = NULL, *prompt = "$ ";
 	ssize_t result;
 	size_t len = 0;
 	pid_t pid;
 
+	envp = environ;
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
@@ -31,7 +32,8 @@ int main(void)
 		}
 		else
 		{
-			args = prep(buffer);
+			path = sep_path(envp);
+			args = prep(buffer, path);
 			if (args == NULL)
 			{
 				perror("Did not find command");
@@ -42,10 +44,11 @@ int main(void)
 				if (pid == -1)
 					return (-1);
 				if (pid == 0)
-					_exec(args);
+					_exec(args, envp);
 				else
 					wait(NULL);
 			}
+			free(path);
 			free(args);
 		}
 	}

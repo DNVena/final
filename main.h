@@ -14,7 +14,7 @@ int len_path(char *buffer);
 char *_getenv(char **envp);
 char **checker(char **path, char **args);
 char *find_path(char **path, char *filename);
-char **prep(char *buffer);
-void _exec(char **args);
+char **prep(char *buffer, char **path);
+void _exec(char **args, char **envp);
 char *command(char **path, char *filename);
 #endif

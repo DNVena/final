@@ -10,13 +10,11 @@
  * @buffer: takes pointer
  * Return: pointer to pointer
  */
-char **prep(char *buffer)
+char **prep(char *buffer, char **path)
 {
-	char **tokens, **args, **path;
-	char **envp = environ;
+	char **tokens, **args;
 
 	tokens = tokenize(buffer);
-	path = sep_path(envp);
 	args = checker(path, tokens);
 
 	return (args);
@@ -28,11 +26,8 @@ char **prep(char *buffer)
  * @envp: takes pointet to pointer
  * Return: void
  */
-void _exec(char **args)
+void _exec(char **args, char **envp)
 {
-	char **envp;
-	envp = environ;
-
 	if (execve(args[0], args, envp) == -1)
 	{
 		perror("Error: Can't");

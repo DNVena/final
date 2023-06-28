@@ -39,10 +39,10 @@ char **tokenize(char *buffer)
 	char *buf_cpy;
 
 	buf_cpy = _strdup(buffer);
-	num = len_buf(buf_cpy);
+	num = len_buf(buffer);
 	args = malloc(sizeof(char *) * (num + 1));
 
-	token = strtok(buffer, " \n");
+	token = strtok(buf_cpy, " \n");
 	len = _strlen(token);
 	for (i = 0; token != NULL; i++)
 	{
@@ -51,7 +51,6 @@ char **tokenize(char *buffer)
 		token = strtok(NULL, " \n");
 	}
 	args[i] = NULL;
-	free(buf_cpy);
 	return (args);
 }
 

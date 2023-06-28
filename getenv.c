@@ -72,7 +72,6 @@ char **sep_path(char **envp)
 		token = strtok(NULL, ":");
 	}
 	tokens[j] = NULL;
-	free(buf_cpy);
 	return (tokens);
 }
 
@@ -120,7 +119,7 @@ char *command(char **path, char *filename)
 	char *com;
 	char *command;
 	char s = '/';
-	int len, i;
+	int len;
 
 	token = find_path(path, filename);
 	if (token == NULL)
@@ -128,9 +127,6 @@ char *command(char **path, char *filename)
 		return (NULL);
 	}
 	len = strlen(filename);
-	i = strlen(token);
-	com = malloc(i + 1);
-	command = malloc(len + i + 1);
 	com = strncat(token, &s, 1);
 	command = strncat(com, filename, len);
 
