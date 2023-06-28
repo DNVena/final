@@ -36,9 +36,9 @@ char **tokenize(char *buffer)
 	int i = 0, num, len;
 	char *token;
 	char **args;
-	char *buf_cpy;
+	char *buf_cpy = (char *)malloc(1024);
 
-	buf_cpy = _strdup(buffer);
+	strcpy(buf_cpy, buffer);
 	num = len_buf(buf_cpy);
 	args = malloc(sizeof(char *) * (num + 1));
 
@@ -50,7 +50,6 @@ char **tokenize(char *buffer)
 		token = strtok(NULL, " \n");
 	}
 	args[i] = NULL;
-	free(buf_cpy);
 	return (args);
 }
 
@@ -74,8 +73,6 @@ char **checker(char **path, char **args)
 		}
 		else
 		{
-			 i = _strlen(new);
-			 args[0] = malloc(sizeof(char) * (i + 1));
 			 args[0] = new;
 		}
 	}
